@@ -9,11 +9,12 @@
 
 
     <TextView
+        android:id="@+id/tv_indicator_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="17dp"
         android:paddingRight="17dp"
-        android:text="计息180天，历史年化10.5"
+        android:text=""
         android:textColor="#ffffff"
         android:textSize="14dp" />
 

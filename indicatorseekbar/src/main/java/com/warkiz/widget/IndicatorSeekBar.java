@@ -19,9 +19,11 @@ import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.text.TextPaint;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
+import android.view.TextureView;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
@@ -989,6 +991,7 @@ public class IndicatorSeekBar extends View implements ViewTreeObserver.OnGlobalL
             mIndicator.update();
         }
     }
+
 
     /**
      * call this to avoid user to seek;

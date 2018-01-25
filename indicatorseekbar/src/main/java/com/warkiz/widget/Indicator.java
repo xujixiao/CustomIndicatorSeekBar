@@ -6,6 +6,7 @@ import android.os.Build;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -34,6 +35,9 @@ public class Indicator {
     private LinearLayout mTopContentView;
     private int mGap;
     private BuilderParams p;
+    private TextView topText;
+    public static String topHintText;
+
 
     public Indicator(Context context, IndicatorSeekBar seekBar, BuilderParams p) {
         this.mContext = context;
@@ -92,6 +96,7 @@ public class Indicator {
                     //for the custom indicator top content view, if progress need to show when seeking ,
                     //need a TextView to show progress and this textView 's identify must be progress;
                     int progressTextViewId = mContext.getResources().getIdentifier("isb_progress", "id", mContext.getApplicationContext().getPackageName());
+                    int progressTextContentViewId = mContext.getResources().getIdentifier("tv_indicator_content", "id", mContext.getApplicationContext().getPackageName());
                     View topContentView = p.mIndicatorCustomTopContentView;
                     if (progressTextViewId > 0) {
                         View tv = topContentView.findViewById(progressTextViewId);
@@ -103,7 +108,10 @@ public class Indicator {
                     } else {
                         setIndicatorTopContentView(topContentView);
                     }
-
+                    if (progressTextContentViewId > 0) {
+                        topText = topContentView.findViewById(progressTextContentViewId);
+                        Log.d("xujixiao", (topText == null) + "是空不是空");
+                    }
                 }
             }
         }
@@ -210,6 +218,9 @@ public class Indicator {
         } else if (mIndicatorText != null) {
             mIndicatorText.setText(mSeekBar.getProgressString());
             mIndicator.getContentView().measure(0, 0);
+        }
+        if (topText != null &&topHintText!=null) {
+            topText.setText(topHintText);
         }
         mIndicator.update(mSeekBar, (int) (touchX - mIndicator.getContentView().getMeasuredWidth() / 2), -(mSeekBar.getMeasuredHeight() + mIndicator.getContentView().getMeasuredHeight() - mSeekBar.getPaddingTop() + mGap), -1, -1);
         adjustArrow(touchX);
